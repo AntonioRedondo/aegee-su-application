@@ -1,0 +1,8 @@
+dev
+node_modules
+npm-debug.log
+build
+assets
+src/style.css
+src/app.js
+.idea

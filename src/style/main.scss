@@ -1,0 +1,393 @@
+@import "variables";
+
+.main {
+	overflow: hidden;
+	
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	
+	background: black;
+}
+
+
+
+
+
+.main-bg {
+	width: 100%;
+	height: 100%;
+	
+	position: absolute;
+	
+	opacity: 0;
+	
+	transition: all $time3 3s;
+	
+	@media (max-width: $breakpointMobile) {
+		display: none;
+	}
+	
+	&--in {
+		opacity: 0.7;
+	}
+}
+
+
+
+
+
+.slide {
+	width: 100%;
+	height: 100%;
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+	display: block;
+	
+	background-size: cover;
+	background-position: center;
+	
+	transition: all 0.4s;
+	transition-timing-function: cubic-bezier(-0.01, 1.01, -0.01, 1.01);
+	opacity: 0;
+	transform: scale3d(1.5, 1.5, 1);
+	
+	&--in {
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+	}
+	
+	&--out {
+		opacity: 0;
+		transform: scale3d(0.5, 0.5, 1);
+	}
+	
+	&--1 {
+		background-image: url('img/1.jpg');
+	}
+	
+	&--2 {
+		background-image: url('img/2.jpg');
+		background-position: center top;
+	}
+	
+	&--3 {
+		background-image: linear-gradient(
+			-45deg, #111, #222
+		);
+	}
+	
+	&--4 {
+		background-image: url('img/4.jpg');
+		background-position: center 35%;
+	}
+	
+	&--5 {
+		background-image: linear-gradient(
+			135deg, #69f0ae, #2e7d32
+		);
+	}
+	
+	&--5a {
+		width: 33%;
+		background-image: url('img/5a.jpg');
+		box-shadow: 0 0 8vw color(#111 a(50%));
+	}
+	
+	&--5b {
+		width: 33%;
+		left: 33%;
+		background-image: url('img/5b.jpg');
+		background-position-x: 67%;
+		box-shadow: 0 0 8vw color(#111 a(50%));
+	}
+	
+	&--5c {
+		width: 34%;
+		left: unset;
+		right: 0;
+		background-image: url('img/5c.jpg');
+		background-position-x: 30%;
+		box-shadow: 0 0 8vw color(#111 a(50%));
+	}
+	
+	&--6 {
+		background-image: linear-gradient(
+			-45deg, #81022d 10%, #c5346c 50%, #fca90b 100%
+		);
+	}
+	
+	&--6a {
+		width: 33%;
+		background-image: url('img/6a.jpg');
+		box-shadow: 0 0 8vw color(#111 a(50%));
+	}
+	
+	&--6b {
+		width: 33%;
+		left: 33%;
+		background-image: url('img/6b.jpg');
+		box-shadow: 0 0 8vw color(#111 a(50%));
+		background-position-x: 67%;
+	}
+	
+	&--6c {
+		width: 34%;
+		left: unset;
+		right: 0;
+		background-image: url('img/6c.jpg');
+		box-shadow: 0 0 8vw color(#111 a(50%));
+		background-position-x: 30%;
+	}
+	
+	&--7 {
+		padding-left: 2vw;
+		background-image: linear-gradient(
+			-45deg,
+			#7234c5 55%,
+			#3b0bfc 100%
+			);
+	}
+	
+	&--7a {
+		width: 50%;
+		left: unset;
+		right: 0;
+		background-image: url('img/7.jpg');
+		background-position: center top;
+		box-shadow: 0 0 8vw color(#111 a(50%));
+	}
+	
+	&--8 {
+		background-image: linear-gradient(
+			-45deg, #81022d 10%, #c5346c 50%, #fca90b 100%
+		);
+	}
+	
+	&--8a {
+		height: 75%;
+		top: 22vh;
+		background-image: url('img/8.jpg');
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+	
+	&--9 {
+		background-image: linear-gradient(
+			-45deg, #401cad 10%, #c5346c 50%, #fca90b 100%
+		);
+	}
+	
+	&--9a {
+		width: 50%;
+		height: 98%;
+		top: unset;
+		bottom: 0;
+		left: unset;
+		right: 6vw;
+		z-index: 0;
+		background-image: url('img/9.png');
+		background-position: center bottom;
+		background-size: contain;
+		background-repeat: no-repeat;
+	}
+	
+	&--9b {
+		width: 14vw;
+		height: 9vw;
+		top: unset;
+		bottom: 30vw;
+		left: 0vw;
+		z-index: 1;
+		background-image: url(img/9b.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		animation: spin 1s 1s;
+		
+		@at-root { @keyframes spin {
+		    from { opacity: 0; }
+		    to { opacity: 1; } }
+		}
+	}
+	
+	&--9c {
+		background-image: url('img/9c.jpg');
+		animation: spin 20s infinite linear;
+		height: 200vw;
+		width: 200vw;
+		top: -50%;
+		left: -25%;
+		
+		@at-root { @keyframes spin {
+		    from { transform:rotate(0deg); }
+		    to { transform:rotate(360deg); } }
+		}
+	}	
+}
+
+.slide-text {
+	position: absolute;
+	margin: 0;
+	font-size: 3em;
+	
+	transition: all 0.3s 0.5s ease-out;
+	
+	opacity: 0;
+	transform: translate3d(2vw, 0, 0);
+	
+	&--in {
+		opacity: 0.9;
+		transform: translate3d(0, 0, 0);
+	}
+	
+	&--1 {
+		bottom: 4vw;
+		left: 4vw;
+		color: #bd7800;
+		line-height: 4vw;
+		font-size: 4vw;
+		font-family: "Black Ops One", sans;
+	}
+	
+	&--2 {
+		top: 4vw;
+		right: 5vw;
+		color: #4dffd7;
+		line-height: 4vw;
+		font-size: 4vw;
+		font-family: "Source Sans Pro", sans;
+		font-weight: 300;
+		text-align: right;
+	}
+	
+	&--3 {
+		top: calc(50% - 5vw);
+		left: 0;
+		right: 0;
+		font-size: 5vw;
+		font-family: "Caveat", sans;
+		text-align: center;
+	}
+	
+	&--4 {
+		top: 35%;
+		left: 5vw;
+		color: #00ffff;
+		line-height: 5vw;
+		font-size: 5vw;
+		font-family: "Source Sans Pro", sans;
+	}
+	
+	&--5 {
+		bottom: 5vw;
+		left: 5vw;
+		line-height: 5.5vw;
+		font-size: 6vw;
+		font-family: "Source Sans Pro", sans;
+		font-weight: 300;
+		color: #9c27b0;
+	}
+	
+	&--5a {
+		top: 4vw;
+		left: 4.5vw;
+		line-height: 3vw;
+		font-size: 3vw;
+		font-family: "Source Sans Pro", sans;
+		font-weight: 300;
+	}
+	
+	&--5black {
+		color: black;
+	}
+	
+	&--6 {
+		top: 4vw;
+		left: 5vw;
+		line-height: 4.8vw;
+		font-size: 4vw;
+		font-family: "Bungee Shade", sans;
+	}
+	
+	&--6a {
+		bottom: 5vw;
+		left: 0;
+		right: 0;
+		line-height: 4.8vw;
+		font-size: 5vw;
+		font-family: "Pacifico", sans;
+		font-weight: 400;
+		text-align: center;
+		color: white;
+		text-shadow: 0 0 3vw color(#f44336 a(100%));
+	}
+	
+	&--6b {
+		bottom: 8vw;
+		left: 0;
+		right: 0;
+		line-height: 4.8vw;
+		font-size: 8vw;
+		font-family: "Pacifico", sans;
+		font-weight: 400;
+		text-align: center;
+		color: white;
+		text-shadow: 0 0 3vw color(#e91e63 a(100%));
+	}
+	
+	&--6c {
+		bottom: 5vw;
+		left: 0;
+		right: 0;
+		line-height: 4.8vw;
+		font-size: 5vw;
+		font-family: "Pacifico", sans;
+		text-align: center;
+		color: white;
+		text-shadow: 0 0 3vw color(#ab47bc a(100%));
+	}
+	
+	&--7a {
+		margin: 5vh 0;
+		padding: 6vh 3vw 0;
+		line-height: 4vw;
+		color: #ffbe6b;
+		font-size: 3.8vw;
+		font-family: "Source Sans Pro", sans;
+	}
+	
+	&--7b {
+		margin: 0;
+		padding: 0 3vw;
+		color: #ffbe6b;
+		line-height: 3.2vw;
+		font-size: 2.8vw;
+		font-family: "Source Sans Pro", sans;
+	}
+	
+	&--8 {
+		width: 100vw;
+		margin: 12vh 0;
+		line-height: 4.5vw;
+		color: #1900ff;
+		font-size: 5vw;
+		font-family: "Source Sans Pro", sans;
+		text-align: center;
+	}
+	
+	&--9 {
+		margin: 6vw 6vw;
+		bottom: 0;
+		z-index: 1;
+		line-height: 6.5vw;
+		font-size: 7.5vw;
+		font-family: "Monofett", sans;
+		transition-duration: 0.8s;
+		transition-timing-function: cubic-bezier(-0.01, 1.01, -0.01, 1.01);
+	}
+}
