@@ -170,18 +170,18 @@ function initIntro() {
 		console.log(wheelLevel);
 	});
 	
-	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
-	// o.ae("touchstart", touchStartListener = function(e) {
-	// 	yStart = e.touches[0].clientY;
-	// });
-	// 
-	// o.ae("touchend", touchEndListener = function(e) {
-	// 	yEnd = e.changedTouches[0].clientY;
-	// 	if (yEnd - yStart < -60)
-	// 		movePhrases(1);
-	// 	else if (yEnd - yStart > 60)
-	// 		movePhrases(-1);
-	// });
+	http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+	o.ae("touchstart", touchStartListener = function(e) {
+		yStart = e.touches[0].clientY;
+	});
+	
+	o.ae("touchend", touchEndListener = function(e) {
+		yEnd = e.changedTouches[0].clientY;
+		if (yEnd - yStart < -60)
+			window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 }}));
+		else if (yEnd - yStart > 60)
+			window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: -1 }}))
+	});
 	
 	
 	
