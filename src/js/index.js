@@ -1,7 +1,7 @@
 
 WebFont.load({
 	google: {
-		families: ["Source Sans Pro:300,900", "Black Ops One:400", "Bungee Shade:400", "Caveat:400", "Pacifico", "Monofett" ]
+		families: ["Open Sans:300,800", "Black Ops One:400", "Bungee Shade:400", "Caveat:400", "Pacifico", "Monofett" ]
 	},
 	active: function() {
 		initIntro();
