@@ -46,7 +46,7 @@ function initIntro() {
 		slidesCount = slides.length,
 		visiblePhrases = [],
 		visibleBubbles = [],
-		phrasesCountReached = false,
+		onTransition = false,
 		yStart,
 		yEnd,
 		transform = o.checkTransformsSupported(),
@@ -148,6 +148,11 @@ function initIntro() {
 	
 	// Counts wheel scroll movements
 	o.ae("wheel", mouseWheelListener = function (e) {
+		if (onTransition)
+			return;
+		
+		onTransition = true;
+		
 		if ((e.deltaY > 0 || e.detail.deltaY > 0) && wheelLevel < (phrasesCount + slidesCount)) {
 			if (wheelLevel === phrasesCount && !o.gc("main-bg").classList.contains("main-bg--in"))
 				return;
@@ -167,10 +172,13 @@ function initIntro() {
 				movePhrases();
 			else moveSlides();
 		}
-		console.log(wheelLevel);
+		
+		o.to(function() {
+			onTransition = false;
+		}, 1000);
 	});
 	
-	http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
 	o.ae("touchstart", touchStartListener = function(e) {
 		yStart = e.touches[0].clientY;
 	});
@@ -180,7 +188,7 @@ function initIntro() {
 		if (yEnd - yStart < -60)
 			window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 }}));
 		else if (yEnd - yStart > 60)
-			window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: -1 }}))
+			window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: -1 }}));
 	});
 	
 	
