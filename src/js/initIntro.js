@@ -149,23 +149,23 @@ function initIntro() {
 	// Counts wheel scroll movements
 	o.ae("wheel", mouseWheelListener = function (e) {
 		
-		if (onTransition && !e.detail.buttonEnter)
+		if (onTransition)
 			return;
 		
 		onTransition = true;
 		
-		if ((e.deltaY > 0 || e.detail.deltaY > 0) && wheelLevel < (phrasesCount + slidesCount)) {
+		label1: if ((e.deltaY > 0 || e.detail.deltaY > 0) && wheelLevel < (phrasesCount + slidesCount)) {
 			if (wheelLevel === phrasesCount && !o.gc("main-bg").classList.contains("main-bg--in"))
-				return;
+				break label1;
 				
 			++wheelLevel;
 			
 			if (wheelLevel <= phrasesCount)
 				movePhrases();
 			else moveSlides();
-		} else if ((e.deltaY < 0 || e.detail.deltaY < 0 ) && wheelLevel > 0) {
+		} else label2: if ((e.deltaY < 0 || e.detail.deltaY < 0 ) && wheelLevel > 0) {
 			if (wheelLevel === phrasesCount && o.gc("main-bg").classList.contains("main-bg--in"))
-				return;
+				break label2;
 				
 			--wheelLevel;
 			
@@ -218,7 +218,7 @@ function initIntro() {
 		
 		hideIntro();
 		
-		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1, buttonEnter: true }}));
+		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 }}));
 	}
 	
 	o.gc("enter-button").addEventListener("click", function(e) { skipIntro("Enter button"); });
