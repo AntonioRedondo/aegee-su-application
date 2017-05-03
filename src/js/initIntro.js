@@ -176,7 +176,7 @@ function initIntro() {
 		
 		o.to(function() {
 			onTransition = false;
-		}, 600);
+		}, 800);
 	});
 	
 	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
