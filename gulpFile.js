@@ -34,7 +34,7 @@ const dest = "docs";
 
 
 gulp.task("default", ["watch"]);
-gulp.task("lint", ["jsHint", "htmlLint", "cssLint"]);
+gulp.task("lint", ["jsHint", "htmlLint"/*, "cssLint"*/]);
 gulp.task("build", ["buildJs", "buildHtml", "buildCss"/*, "copyAssets"*/]);
 
 

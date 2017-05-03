@@ -148,7 +148,8 @@ function initIntro() {
 	
 	// Counts wheel scroll movements
 	o.ae("wheel", mouseWheelListener = function (e) {
-		if (onTransition)
+		
+		if (onTransition && !e.detail.buttonEnter)
 			return;
 		
 		onTransition = true;
@@ -175,7 +176,7 @@ function initIntro() {
 		
 		o.to(function() {
 			onTransition = false;
-		}, 800);
+		}, 600);
 	});
 	
 	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -217,13 +218,12 @@ function initIntro() {
 		
 		hideIntro();
 		
-		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 }}));
+		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1, buttonEnter: true }}));
 	}
 	
 	o.gc("enter-button").addEventListener("click", function(e) { skipIntro("Enter button"); });
 	
 	o.ae("keydown", keyDownListener = function(e) {
-		console.log(e.keyCode);
 		switch (e.keyCode) {
 			case 39:
 			case 40: window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 }})); break;
