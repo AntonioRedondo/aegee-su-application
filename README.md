@@ -15,9 +15,9 @@ Check the website online on http://TonyWantsToGoOnSU.com.
 <img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/1.png" width="900px" />
 <img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/2.png" width="900px" />
 <img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/3.png" width="900px" />
-<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/4.jpg" width="900px" />
-<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/5.jpg" width="900px" />
-<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/6.jpg" width="900px" />
-<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/7.jpg" width="900px" />
-<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/8.jpg" width="900px" />
-<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/9.jpg" width="900px" />
+<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/4.png" width="900px" />
+<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/5.png" width="900px" />
+<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/6.png" width="900px" />
+<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/7.png" width="900px" />
+<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/8.png" width="900px" />
+<img src="https://github.com/AntonioRedondo/aegee-su-application/raw/master/readmeImages/9.png" width="900px" />
