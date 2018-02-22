@@ -1,12 +1,11 @@
-"use strict";
-
+// Basics
 const del = require("del");
 const runSequence = require("run-sequence");
 const gulp = require("gulp");
 const sourcemaps = require("gulp-sourcemaps");
 
 // Lint
-const jsHint = require("gulp-jshint");
+const esLint = require("gulp-eslint");
 const htmlLint = require("gulp-htmllint");
 const cssLint = require("gulp-stylelint");
 
@@ -22,36 +21,24 @@ const assets = require("postcss-assets");
 // Minify
 const jsMin = require("gulp-uglify");
 const htmlMin = require("gulp-htmlmin");
-const cssMin = require("gulp-clean-css");
 
 
 
 
-const src = "src";
-const dest = "docs";
-
-
-
-
-gulp.task("default", ["watch"]);
-gulp.task("lint", ["jsHint", "htmlLint"/*, "cssLint"*/]);
-gulp.task("build", ["buildJs", "buildHtml", "buildCss"/*, "copyAssets"*/]);
-
-
-
-
-
-gulp.task("clean", () => {
-	return del([`${dest}`]);
-});
-
+const SRC = "SRC";
+const DEST = "docs";
 
 
 
 
 gulp.task("watch", ["lint", "build"], () => {
-	gulp.watch([`${src}/**`], ["lint", "build"]);
+	gulp.watch([`${SRC}/**`], ["lint", "build"]);
 });
+gulp.task("default", ["watch"]);
+gulp.task("lint", ["esLint", "htmlLint", "cssLint"]);
+gulp.task("build", ["buildJs", "buildHtml", "buildCss"/*, "copyAssets"*/]);
+
+gulp.task("clean", () => del([`${DEST}`]));
 
 
 
@@ -59,42 +46,23 @@ gulp.task("watch", ["lint", "build"], () => {
 
 // ---------- LINT ---------- //
 
-gulp.task("jsHint", () => {
-	return gulp.src([`${src}/js/*.js`])
-		.pipe(jsHint({
-			lookup: false,
-
-			// http://jshint.com/docs/options
-			// https://github.com/jshint/jshint/blob/master/examples/.jshintrc
-			camelcase: true,
-			devel: true,
-			esversion: 6,
-			immed: true,
-			latedef: true,
-			newcap: true,
-			nonew: true,
-			quotmark: true,
-			
-			globals: { "WebFont": true, "ga": true, "o": true, "pg": true },
-			predef: ["initIntro", "hideIntro", "initMain"],
-			browser: true,
-			jasmine: true,
-			node: true
-		}))
-		.pipe(jsHint.reporter("jshint-stylish"))
-		// .pipe(jsHint.reporter("fail")); // It makes Gulp fail on warning or error
+gulp.task("esLint", () => {
+	return gulp.SRC([`${SRC}/js/*.js`, "gulpfile.js"])
+		.pipe(esLint())
+		.pipe(esLint.format())
+		.pipe(esLint.failAfterError());
 });
 
 gulp.task("htmlLint", () => {
-	return gulp.src([`${src}/*.htm`])
+	return gulp.SRC([`${SRC}/*.htm`])
 		.pipe(htmlLint()); // https://github.com/htmllint/htmllint/wiki/Options
 });
 
 gulp.task("cssLint", () => {
-	return gulp.src([`${src}/style/*.scss`])
+	return gulp.SRC([`${SRC}/style/*.scss`])
 		.pipe(cssLint({ // http://stylelint.io/user-guide/rules
-				failAfterError: false,
-				reporters: [ {formatter: "string", console: true} ]
+			failAfterError: false,
+			reporters: [{ formatter: "string", console: true }]
 		}));
 });
 
@@ -105,51 +73,56 @@ gulp.task("cssLint", () => {
 // ---------- BUILD ---------- //
 
 gulp.task("buildJs", () => {
-	return gulp.src([`node_modules/webfontloader/webfontloader.js`,
-			`${src}/js/plygrnd.js`,
-			`${src}/js/o.js`,
-			`${src}/js/initIntro.js`,
-			`${src}/js/index.js`,
-			`!${src}/js/*.spec.js`])
+	return gulp.src(
+		[
+			"node_modules/webfontloader/webfontloader.js",
+			`${SRC}/js/plygrnd.js`,
+			`${SRC}/js/o.js`,
+			`${SRC}/js/initIntro.js`,
+			`${SRC}/js/index.js`,
+			`!${SRC}/js/*.spec.js`
+		])
 		.pipe(sourcemaps.init())
 		.pipe(concat("app.js"))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(`${dest}`));
+		.pipe(gulp.dest(`${DEST}`));
 });
 
 gulp.task("buildHtml", () => {
-	return gulp.src([`${src}/index.htm`])
+	return gulp.SRC([`${SRC}/index.htm`])
 		.pipe(inline({
 			disabledTypes: ["img", "js", "css"/*, "svg"*/]
 		}))
-		.pipe(gulp.dest(`${dest}`));
+		.pipe(gulp.dest(`${DEST}`));
 });
 
-gulp.task("buildCss", function () {
-	return gulp.src([`${src}/style/*.scss`])
+gulp.task("buildCss", () => {
+	return gulp.SRC([`${SRC}/style/*.scss`])
 		.pipe(sourcemaps.init())
 		.pipe(concat("style.css"))
 		.pipe(postCss([
-			preCss({extension: "scss"}),
+			preCss({ extension: "scss" }),
 			autoprefixer({ browsers: ["safari 8", "ie 10"] }), // https://github.com/ai/browserslist
-			assets({ loadPaths: [`${src}`] })
+			assets({ loadPaths: [`${SRC}`] })
 		]))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(`${dest}`));
+		.pipe(gulp.dest(`${DEST}`));
 });
 
 gulp.task("copyAssets", () => {
-	gulp.src([`${src}/favicon.ico`])
-		.pipe(gulp.dest(`${dest}`));
-	return gulp.src([
-			`${src}/img/bgs.jpg`,
-			`${src}/img/moreInfo.jpg`,
-			`${src}/img/preview.jpg`,
-			`${src}/img/testimonials.jpg`,
-			`${src}/img/descBg.png`,
-			`${src}/img/logos.png`,
-			`${src}/img/profiles.png`])
-		.pipe(gulp.dest(`${dest}/img`));
+	gulp.SRC([`${SRC}/favicon.ico`])
+		.pipe(gulp.dest(`${DEST}`));
+	return gulp.SRC(
+		[
+			`${SRC}/img/bgs.jpg`,
+			`${SRC}/img/moreInfo.jpg`,
+			`${SRC}/img/preview.jpg`,
+			`${SRC}/img/testimonials.jpg`,
+			`${SRC}/img/descBg.png`,
+			`${SRC}/img/logos.png`,
+			`${SRC}/img/profiles.png`
+		])
+		.pipe(gulp.dest(`${DEST}/img`));
 });
 
 
@@ -160,13 +133,13 @@ gulp.task("copyAssets", () => {
 
 gulp.task("min", () => {
 	runSequence("build", () => {
-		return gulp.src([`${dest}/index.htm`])
+		return gulp.SRC([`${DEST}/index.htm`])
 			.pipe(replace(/(<!-- buildDev:start -->)[\s\S]+(<!-- buildDev:end -->)/, "")) // Removes Dev code on Production
 			.pipe(inline({
-				// base: `${dest}`,
+				// base: `${DEST}`,
 				// ignore: [""],
 				disabledTypes: ["img"/*, "svg", "js", "css"*/],
-				js: () => jsMin({mangle: true})
+				js: () => jsMin({ mangle: true })
 			}))
 			.pipe(htmlMin({
 				collapseWhitespace: true,
@@ -175,6 +148,6 @@ gulp.task("min", () => {
 				removeComments: true,
 				removeRedundantAttributes: true
 			}))
-			.pipe(gulp.dest(`${dest}`));
-		});
+			.pipe(gulp.dest(`${DEST}`));
+	});
 });
