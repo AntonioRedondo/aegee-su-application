@@ -79,14 +79,14 @@
 		}
 		
 		/* https://github.com/postcss/postcss-nested/issues/43 */
-		@at-root { @keyframes k--bottom {
+		@at-root { @keyframes k--bottom { //stylelint-disable-line
 				0% { transform: scale(1); }
 				60% { transform: scale(1.6); }
 				100% { transform: scale(1) translate3d(0, 44vh, 0); }
 			}
 		}
 	
-		@at-root { @keyframes k--bottom2 {
+		@at-root { @keyframes k--bottom2 { //stylelint-disable-line
 				0% { transform: scale(1); }
 				60% { transform: scale(1.6); }
 				100% { transform: scale(1) translate3d(0, 40vh, 0); }
@@ -135,7 +135,7 @@
 		background: $profile1;
 		
 		animation: 0.5s linear infinite k__inner-spinner;
-		@at-root { @keyframes k__inner-spinner {
+		@at-root { @keyframes k__inner-spinner { //stylelint-disable-line
 				0% { transform: rotate(0deg) translate3d(20px, 0, 0); }
 				100% { transform: rotate(360deg) translate3d(20px, 0, 0); }
 			}
@@ -166,7 +166,7 @@
 		bottom: 14vh;
 	}
 	
-	@at-root { @keyframes k--introHint {
+	@at-root { @keyframes k--introHint { //stylelint-disable-line
 			from, 20%, 40%, 60%, 80%, to {
 				animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 			}

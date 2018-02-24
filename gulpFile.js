@@ -25,7 +25,7 @@ const htmlMin = require("gulp-htmlmin");
 
 
 
-const SRC = "SRC";
+const SRC = "src";
 const DEST = "docs";
 
 
@@ -47,19 +47,19 @@ gulp.task("clean", () => del([`${DEST}`]));
 // ---------- LINT ---------- //
 
 gulp.task("esLint", () => {
-	return gulp.SRC([`${SRC}/js/*.js`, "gulpfile.js"])
+	return gulp.src([`${SRC}/js/*.js`, "gulpfile.js", `!${SRC}/js/plygrnd.js`])
 		.pipe(esLint())
 		.pipe(esLint.format())
 		.pipe(esLint.failAfterError());
 });
 
 gulp.task("htmlLint", () => {
-	return gulp.SRC([`${SRC}/*.htm`])
+	return gulp.src([`${SRC}/*.htm`])
 		.pipe(htmlLint()); // https://github.com/htmllint/htmllint/wiki/Options
 });
 
 gulp.task("cssLint", () => {
-	return gulp.SRC([`${SRC}/style/*.scss`])
+	return gulp.src([`${SRC}/style/*.scss`])
 		.pipe(cssLint({ // http://stylelint.io/user-guide/rules
 			failAfterError: false,
 			reporters: [{ formatter: "string", console: true }]
@@ -77,10 +77,9 @@ gulp.task("buildJs", () => {
 		[
 			"node_modules/webfontloader/webfontloader.js",
 			`${SRC}/js/plygrnd.js`,
-			`${SRC}/js/o.js`,
+			`${SRC}/js/DOMTools.js`,
 			`${SRC}/js/initIntro.js`,
-			`${SRC}/js/index.js`,
-			`!${SRC}/js/*.spec.js`
+			`${SRC}/js/index.js`
 		])
 		.pipe(sourcemaps.init())
 		.pipe(concat("app.js"))
@@ -89,7 +88,7 @@ gulp.task("buildJs", () => {
 });
 
 gulp.task("buildHtml", () => {
-	return gulp.SRC([`${SRC}/index.htm`])
+	return gulp.src([`${SRC}/index.htm`])
 		.pipe(inline({
 			disabledTypes: ["img", "js", "css"/*, "svg"*/]
 		}))
@@ -97,7 +96,7 @@ gulp.task("buildHtml", () => {
 });
 
 gulp.task("buildCss", () => {
-	return gulp.SRC([`${SRC}/style/*.scss`])
+	return gulp.src([`${SRC}/style/_variables.scss`, `${SRC}/style/*.scss`])
 		.pipe(sourcemaps.init())
 		.pipe(concat("style.css"))
 		.pipe(postCss([
@@ -110,9 +109,9 @@ gulp.task("buildCss", () => {
 });
 
 gulp.task("copyAssets", () => {
-	gulp.SRC([`${SRC}/favicon.ico`])
+	gulp.src([`${SRC}/favicon.ico`])
 		.pipe(gulp.dest(`${DEST}`));
-	return gulp.SRC(
+	return gulp.src(
 		[
 			`${SRC}/img/bgs.jpg`,
 			`${SRC}/img/moreInfo.jpg`,
@@ -133,7 +132,7 @@ gulp.task("copyAssets", () => {
 
 gulp.task("min", () => {
 	runSequence("build", () => {
-		return gulp.SRC([`${DEST}/index.htm`])
+		return gulp.src([`${DEST}/index.htm`])
 			.pipe(replace(/(<!-- buildDev:start -->)[\s\S]+(<!-- buildDev:end -->)/, "")) // Removes Dev code on Production
 			.pipe(inline({
 				// base: `${DEST}`,
