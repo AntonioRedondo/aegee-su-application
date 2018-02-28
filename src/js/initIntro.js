@@ -19,7 +19,7 @@ function hideIntro(type) {
 	introDarkener.addEventListener("transitionend", function(e) {
 		if(e.target.classList.contains("intro-darkener") && type === 2)
 			introDarkener.style.display = "none";
-		else d.to(function() { introDarkener.style.display = "none"; }, 2500);
+		else d.st(function() { introDarkener.style.display = "none"; }, 500);
 	});
 	
 	d.gc("main-bg").classList.add("main-bg--in");
@@ -56,9 +56,7 @@ function initIntro() { // eslint-disable-line
 		// keyDownListener,
 		toControlledRandomMovement,
 		toHints;
-		
-		
-		
+	
 	// On desktop version it moves the phrases and bubbles on the 3d space depending on the cursor position
 	if (viewPortWidth <= 810) {
 		var phrasesContainer = d.gc("phrases"),
@@ -82,7 +80,7 @@ function initIntro() { // eslint-disable-line
 	
 	
 	// Shows a text hint if the intro doesn't start scrolling down in 3 seconds
-	toHints = d.to(function() {
+	toHints = d.st(function() {
 		if (wheelLevel === 0)
 			if (viewPortWidth >= 810 && d.getOS() !== "Android" && d.getOS() !== "iOS")
 				d.gc("scroll-down-hint").classList.add("scroll-down-hint--in");
@@ -99,7 +97,7 @@ function initIntro() { // eslint-disable-line
 		}
 		
 		if (wheelLevel === phrasesCount) {
-			d.to(function() { d.gc("enter-button").classList.add("enter-button--in"); }, 1000);
+			d.st(function() { d.gc("enter-button").classList.add("enter-button--in"); }, 1000);
 			d.gc("scroll-down").classList.add("scroll-down--out");
 		} else {
 			d.gc("enter-button").classList.remove("enter-button--in");
@@ -130,12 +128,14 @@ function initIntro() { // eslint-disable-line
 	function moveSlides() {
 		if (wheelLevel > wheelLevelFormer) {
 			slides[wheelLevel-phrasesCount-1].classList.add("slide--in");
+			slides[wheelLevel-phrasesCount-1].style.zIndex = "1";
 			slides[wheelLevel-phrasesCount-1].firstElementChild.classList.add("slide-text--in");
-			if (wheelLevel-phrasesCount > 1 && !slides[wheelLevel-phrasesCount-1].classList.contains("slide--remain")) {
+			if (wheelLevel-phrasesCount > 1 && slides[wheelLevel-phrasesCount-1].classList.contains("slide--remain")) {
 				slides[wheelLevel-phrasesCount-2].classList.add("slide--out");
 			}
 		} else if (wheelLevel < wheelLevelFormer) {
 			slides[wheelLevel-phrasesCount].classList.remove("slide--in");
+			d.st(function() { slides[wheelLevel-phrasesCount].style.zIndex = "0"; }, 500);
 			slides[wheelLevel-phrasesCount].firstElementChild.classList.remove("slide-text--in");
 			if (wheelLevel-phrasesCount > 0) {
 				slides[wheelLevel-phrasesCount-1].classList.remove("slide--out");
@@ -149,6 +149,7 @@ function initIntro() { // eslint-disable-line
 	d.ae("wheel", /* mouseWheelListener =  */function(e) {
 		
 		if (onTransition)
+			// console.log(); // eslint-disable-line
 			return;
 		
 		onTransition = true;
@@ -156,7 +157,6 @@ function initIntro() { // eslint-disable-line
 		label1: if ((e.deltaY > 0 || e.detail.deltaY > 0) && wheelLevel < (phrasesCount + slidesCount)) {
 			if (wheelLevel === phrasesCount && !d.gc("main-bg").classList.contains("main-bg--in"))
 				break label1;
-				
 			++wheelLevel;
 			
 			if (wheelLevel <= phrasesCount)
@@ -173,14 +173,14 @@ function initIntro() { // eslint-disable-line
 			else moveSlides();
 		}
 		
-		d.to(function() {
+		d.st(function() {
 			onTransition = false;
 		}, 800);
 	});
 	
 	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
 	d.ae("touchstart", /* touchStartListener =  */function(e) {
-		yStart = e.touches[0].clientY;
+		yStart = e.stuches[0].clientY;
 	});
 	
 	d.ae("touchend",/*  touchEndListener =  */function(e) {
@@ -200,7 +200,7 @@ function initIntro() { // eslint-disable-line
 			visibleBubbles[n].firstChild.style[transform] = "translate3d(" + d.getRandomInt() + "px, " + d.getRandomInt() + "px, 0)";
 			visibleBubbles[n].firstChild.style[transform] = "translate3d(" + d.getRandomInt() + "px, " + d.getRandomInt() + "px, 0)";
 		}
-		toControlledRandomMovement = d.to(controlledRandomMovement, 3000);
+		toControlledRandomMovement = d.st(controlledRandomMovement, 3000);
 	})();
 	
 	
@@ -220,7 +220,7 @@ function initIntro() { // eslint-disable-line
 		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 } }));
 	}
 	
-	d.gc("enter-button").addEventListener("click", function() { skipIntro("Enter button"); });
+	d.gc("enter-button").addEventListener("click", function() { skipIntro(); });
 	
 	d.ae("keydown", /* keyDownListener =  */function(e) {
 		switch (e.keyCode) {
@@ -231,4 +231,7 @@ function initIntro() { // eslint-disable-line
 		}
 	});
 	
+	
+	
+	// skipIntro(); // Uncomment it when deveoping and comment <div class="phrases"> on index.htm
 }

@@ -20,9 +20,15 @@ body {
 }
 
 a {
+	display: inline-block;
 	text-decoration: none;
-	color: white;
+	color: inherit;
 	transition: all $time1;
+	
+	&:hover {
+		text-shadow: 0 0 10px white;
+		transform: scale(1.02);
+	}
 }
 
 button {

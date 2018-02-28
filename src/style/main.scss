@@ -43,28 +43,35 @@
 	width: 100%;
 	height: 100%;
 	
+	display: block;
 	position: absolute;
 	top: 0;
 	left: 0;
 	
-	display: block;
-	
 	background-size: cover;
 	background-position: center;
+	opacity: 0;
+	
+	pointer-events: none;
 	
 	transition: all 0.4s;
-	transition-timing-function: cubic-bezier(-0.01, 1.01, -0.01, 1.01);
-	opacity: 0;
+	transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
 	transform: scale3d(1.5, 1.5, 1);
 	
 	&--in {
 		opacity: 1;
 		transform: scale3d(1, 1, 1);
+		pointer-events: all;
+	}
+	
+	&--visible {
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
 	}
 	
 	&--out {
-		opacity: 0;
-		transform: scale3d(0.5, 0.5, 1);
+		// z-index: 1;
+		pointer-events: none;
 	}
 	
 	&--1 {
@@ -92,7 +99,7 @@
 	&--5a {
 		width: 33%;
 		background-image: url('img/5a.jpg');
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
 	}
 	
 	&--5b {
@@ -100,7 +107,7 @@
 		left: 33%;
 		background-image: url('img/5b.jpg');
 		background-position-x: 67%;
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
 	}
 	
 	&--5c {
@@ -109,7 +116,7 @@
 		right: 0;
 		background-image: url('img/5c.jpg');
 		background-position-x: 30%;
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
 	}
 	
 	&--6 {
@@ -119,14 +126,14 @@
 	&--6a {
 		width: 33%;
 		background-image: url('img/6a.jpg');
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
 	}
 	
 	&--6b {
 		width: 33%;
 		left: 33%;
 		background-image: url('img/6b.jpg');
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
 		background-position-x: 67%;
 	}
 	
@@ -135,22 +142,76 @@
 		left: unset;
 		right: 0;
 		background-image: url('img/6c.jpg');
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
 		background-position-x: 30%;
+	}
+	
+	&--10a {
+		background-image: linear-gradient(135deg, $profile1, #7234c5);
+		color: #a7fffb;
+	}
+	
+	&--10b {
+		color: #a7fffb;
 	}
 	
 	&--7 {
 		padding-left: 2vw;
 		background-image: linear-gradient(-45deg, #7234c5 55%, #3b0bfc 100%);
+		color: #ffbe6b;
 	}
 	
 	&--7a {
 		width: 50%;
+		height: 50%;
+		padding: 0 2vw;
+		
+		top: 0;
 		left: unset;
 		right: 0;
-		background-image: url('img/7.jpg');
-		background-position: center top;
-		box-shadow: 0 0 8vw color(#111 a(50%));
+		
+		background: url('img/7a.jpg') center 15% / cover;
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
+		font-size: 3vw;
+		font-weight: bold;
+		text-shadow: 0.1vw 0.1vw 0.5vw $black040;
+		font-family: 'Bungee Shade', sans-serif;
+		line-height: 6vw;
+	}
+	
+	&--7b {
+		width: 50%;
+		height: 50%;
+		padding: 0 2vw;
+		
+		top: 50%;
+		left: 0;
+		
+		background: url('img/7b.jpg') center 30% / cover;
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
+		font-size: 3vw;
+		font-weight: bold;
+		text-shadow: 0.1vw 0.1vw 0.5vw $black040;
+		font-family: 'Bungee Shade', sans-serif;
+		line-height: 6vw;
+	}
+	
+	&--7c {
+		width: 50%;
+		height: 50%;
+		padding: 0 2vw;
+		
+		top: 50%;
+		left: unset;
+		right: 0;
+		
+		background: url('img/7c.jpg') center 30% / cover;
+		box-shadow: 0 0 8vw color-mod(#111 alpha(50%));
+		font-size: 3vw;
+		font-weight: bold;
+		text-shadow: 0.1vw 0.1vw 0.5vw $black040;
+		font-family: 'Bungee Shade', sans-serif;
+		line-height: 6vw;
 	}
 	
 	&--8 {
@@ -176,7 +237,6 @@
 		bottom: 0;
 		left: unset;
 		right: 6vw;
-		z-index: 0;
 		background-image: url('img/9.png');
 		background-position: center bottom;
 		background-size: contain;
@@ -189,17 +249,7 @@
 		top: unset;
 		bottom: 30vw;
 		left: 0;
-		z-index: 1;
-		background-image: url(img/9b.png);
-		background-size: contain;
-		background-repeat: no-repeat;
-		animation: spin 1s 1s;
-		
-		@at-root { @keyframes spin { //stylelint-disable-line
-				from { opacity: 0; }
-				to { opacity: 1; }
-			}
-		}
+		background: url('img/9b.png') center/ contain no-repeat;
 	}
 	
 	&--9c {
@@ -210,9 +260,10 @@
 		top: -50%;
 		left: -25%;
 		
-		@at-root { @keyframes spin { //stylelint-disable-line
-				from { transform: rotate(0deg); }
-				to { transform: rotate(360deg); }
+		@at-root {
+			@keyframes spin {
+				1% { transform: rotate(1deg); }
+				99% { transform: rotate(360deg); }
 			}
 		}
 	}
@@ -221,6 +272,7 @@
 .slide-text {
 	position: absolute;
 	margin: 0;
+	pointer-events: none;
 	font-size: 3em;
 	
 	transition: all 0.3s 0.5s ease-out;
@@ -230,13 +282,14 @@
 	
 	&--in {
 		opacity: 0.9;
+		pointer-events: all;
 		transform: translate3d(0, 0, 0);
 	}
 	
 	&--1 {
 		bottom: 4vw;
 		left: 4vw;
-		color: #bd7800;
+		color: black;
 		line-height: 4vw;
 		font-size: 4vw;
 		font-family: "Black Ops One", sans-serif;
@@ -309,7 +362,7 @@
 		font-weight: 400;
 		text-align: center;
 		color: white;
-		text-shadow: 0 0 3vw color(#f44336 a(100%));
+		text-shadow: 0 0 3vw color-mod(#f44336 alpha(100%));
 	}
 	
 	&--6b {
@@ -322,7 +375,7 @@
 		font-weight: 400;
 		text-align: center;
 		color: white;
-		text-shadow: 0 0 3vw color(#e91e63 a(100%));
+		text-shadow: 0 0 3vw color-mod(#e91e63 alpha(100%));
 	}
 	
 	&--6c {
@@ -334,24 +387,46 @@
 		font-family: "Pacifico", sans-serif;
 		text-align: center;
 		color: white;
-		text-shadow: 0 0 3vw color(#ab47bc a(100%));
+		text-shadow: 0 0 3vw color-mod(#ab47bc alpha(100%));
 	}
 	
-	&--7a {
-		margin: 5vh 0;
-		padding: 6vh 3vw 0;
-		line-height: 4vw;
-		color: #ffbe6b;
-		font-size: 3.8vw;
+	&--10a {
+		width: 100%;
+		margin: 6vh auto;
+		
+		font-size: 2.5vw;
+		font-weight: bold;
+		font-family: "Source Sans Pro", sans-serif;
+		font-family: "Bungee Shade", sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+	}
+	
+	&--10b {
+		font-weight: bold;
+		text-transform: uppercase;
+		font-family: "Bungee Shade", sans-serif;
+		line-height: 3vw;
+	}
+	
+	&--10c {
+		margin-left: 9vw;
+		position: absolute;
+		font-size: 1.5vw;
 		font-family: "Source Sans Pro", sans-serif;
 	}
 	
-	&--7b {
+	&--7 {
+		width: 50%;
+		height: 50%;
 		margin: 0;
-		padding: 0 3vw;
-		color: #ffbe6b;
-		line-height: 3.2vw;
-		font-size: 2.8vw;
+		
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		
+		line-height: 4vw;
+		font-size: 3.8vw;
 		font-family: "Source Sans Pro", sans-serif;
 	}
 	
@@ -373,6 +448,6 @@
 		font-size: 7.5vw;
 		font-family: "Monofett", sans-serif;
 		transition-duration: 0.8s;
-		transition-timing-function: cubic-bezier(-0.01, 1.01, -0.01, 1.01);
+		transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
 	}
 }

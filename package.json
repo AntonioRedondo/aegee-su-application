@@ -1,10 +1,10 @@
 {
-	"name": "antonioRedondo.com",
+	"name": "tonywantstogoonsu.com",
 	"author": "Antonio Redondo",
-	"homepage": "http://antonioredondo.com",
-	"description": "Antonio Redondo's window to the world",
-	"version": "1.0.0",
-	"repository": "antonioredondo/antonioredondo.com-v3",
+	"homepage": "http://tonywantstogoonsu.com",
+	"description": "Motivation website to apply for AEGEE SUs",
+	"version": "0.1.0",
+	"repository": "antonioredondo/aegee-su-application",
 	"license": "CC-BY-NC-ND-4.0",
 	"main": "",
 	"scripts": {
@@ -21,28 +21,25 @@
 	"//": "Grouped by concern: basics, lint, build, production, server",
 	"devDependencies": {
 		"del": "3.0.0",
-		"run-sequence": "2.2.1",
 		"gulp": "3.9.1",
+		"gulp-newer": "1.4",
 		"gulp-sourcemaps": "2.6.4",
-		
 		"gulp-eslint": "4.0",
-		"gulp-htmllint": "0.0.15",
+		"gulp-htmlhint": "2.1",
 		"gulp-stylelint": "6.0.0",
 		"stylelint": "9.1.1",
 		"stylelint-config-standard": "18.1",
-		
 		"gulp-concat": "2.6.1",
 		"gulp-replace": "0.6.1",
 		"gulp-postcss": "7.0.1",
 		"precss": "3.1.1",
 		"autoprefixer": "8.0.0",
 		"gulp-inline": "0.1.3",
+		"gulp-atomizer": "3.0",
 		"postcss-assets": "5.0.0",
-		
 		"gulp-uglify": "3.0.0",
 		"gulp-htmlmin": "4.0.0",
 		"gulp-clean-css": "3.9.2",
-		
 		"connect": "3.6.6",
 		"serve-static": "1.13.2",
 		"opn": "5.2"
