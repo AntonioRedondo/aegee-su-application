@@ -180,7 +180,7 @@ function initIntro() { // eslint-disable-line
 	
 	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
 	d.ae("touchstart", /* touchStartListener =  */function(e) {
-		yStart = e.stuches[0].clientY;
+		yStart = e.touches[0].clientY;
 	});
 	
 	d.ae("touchend",/*  touchEndListener =  */function(e) {

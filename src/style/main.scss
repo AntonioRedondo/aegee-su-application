@@ -262,8 +262,8 @@
 		
 		@at-root {
 			@keyframes spin {
-				1% { transform: rotate(1deg); }
-				99% { transform: rotate(360deg); }
+				0% { transform: rotate(1deg); }
+				100% { transform: rotate(360deg); }
 			}
 		}
 	}
@@ -424,10 +424,15 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-flow: column;
 		
 		line-height: 4vw;
 		font-size: 3.8vw;
 		font-family: "Source Sans Pro", sans-serif;
+	}
+	
+	&--7b {
+		font-size: 1.5vw;
 	}
 	
 	&--8 {
