@@ -49,6 +49,8 @@ function initIntro() { // eslint-disable-line
 		yStart,
 		yEnd,
 		transform = d.checkTransformsSupported(),
+		audioTrack,
+		audioTrackFormer,
 		mouseMoveListener,
 		// mouseWheelListener,
 		// touchStartListener,
@@ -89,6 +91,38 @@ function initIntro() { // eslint-disable-line
 	
 	
 	
+	function changeAudio(audio) {
+		audioTrackFormer = audioTrack;
+		audioTrack = audio;
+		
+		if (audioTrack !== audioTrackFormer) {
+			fadeAudio(audioTrackFormer);
+			var audioTrackElement = d.gi("audio" + audio);
+			audioTrackElement.currentTime = 0;
+			audioTrackElement.volume = 1;
+			audioTrackElement.play();
+		}
+	}
+	
+	
+	
+	function fadeAudio(audioTrackFormer) {
+		if (audioTrackFormer) {
+			var audioTrackFormerElement = d.gi("audio" + audioTrackFormer);
+			var fadeAudio = d.si(function() {
+				console.log("volume: " + audioTrackFormerElement.volume); // eslint-disable-line
+				if (audioTrackFormerElement.volume - 0.1 < 0) {
+					audioTrackFormerElement.pause();
+					clearInterval(fadeAudio);
+					return;
+				}
+				audioTrackFormerElement.volume -= 0.1;
+			}, 100);
+		}
+	}
+	
+	
+	
 	// Moves phrases and bubbles accordingly
 	function movePhrases() {
 		if (wheelLevel === 1) {
@@ -103,7 +137,7 @@ function initIntro() { // eslint-disable-line
 			d.gc("enter-button").classList.remove("enter-button--in");
 			d.gc("scroll-down").classList.remove("scroll-down--out");
 		}
-
+		
 		if (wheelLevel > wheelLevelFormer) {
 			visiblePhrases.splice(0, 0, (phrases[wheelLevel-1]));
 			visibleBubbles.splice(0, 0, (bubbles[wheelLevel-1]));
@@ -119,7 +153,7 @@ function initIntro() { // eslint-disable-line
 			visiblePhrases.splice(0, 1);
 			visibleBubbles.splice(0, 1);
 		}
-
+		
 		wheelLevelFormer = wheelLevel;
 	}
 	
@@ -147,9 +181,7 @@ function initIntro() { // eslint-disable-line
 	
 	// Counts wheel scroll movements
 	d.ae("wheel", /* mouseWheelListener =  */function(e) {
-		
 		if (onTransition)
-			// console.log(); // eslint-disable-line
 			return;
 		
 		onTransition = true;
@@ -158,6 +190,13 @@ function initIntro() { // eslint-disable-line
 			if (wheelLevel === phrasesCount && !d.gc("main-bg").classList.contains("main-bg--in"))
 				break label1;
 			++wheelLevel;
+			
+			if (wheelLevel === 1) changeAudio(1);
+			if (wheelLevel === 6) changeAudio(2);
+			if (wheelLevel === 9) changeAudio(3);
+			if (wheelLevel === 15) changeAudio(4);
+			if (wheelLevel === 20) changeAudio(5);
+			if (wheelLevel === 23) changeAudio(6);
 			
 			if (wheelLevel <= phrasesCount)
 				movePhrases();
@@ -168,14 +207,19 @@ function initIntro() { // eslint-disable-line
 				
 			--wheelLevel;
 			
+			if (wheelLevel === 7) changeAudio(2);
+			if (wheelLevel === 13) changeAudio(3);
+			if (wheelLevel === 19) changeAudio(4);
+			if (wheelLevel === 21) changeAudio(5);
+			
 			if (wheelLevel < phrasesCount)
 				movePhrases();
 			else moveSlides();
 		}
 		
-		d.st(function() {
-			onTransition = false;
-		}, 800);
+		// console.log(wheelLevel); // eslint-disable-line
+		
+		d.st(function() { onTransition = false; }, 800);
 	});
 	
 	// http://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -193,7 +237,7 @@ function initIntro() { // eslint-disable-line
 	
 	
 	
-	// Moves randomly horizontally and vertically the bubble layers
+	// Moves horizontally and vertically the bubble layers in a random way
 	(function controlledRandomMovement() {
 		for (var n=0; n<visibleBubbles.length; ++n) {
 			//var zTrans = /\.*translateZ\((.*)px\)/i.exec(document.getElementById("dv").getAttribute("style"))[1];
@@ -233,5 +277,5 @@ function initIntro() { // eslint-disable-line
 	
 	
 	
-	// skipIntro(); // Uncomment it when deveoping and comment <div class="phrases"> on index.htm
+	// skipIntro(); // Uncomment it when developing and comment <div class="phrases"> on index.htm
 }

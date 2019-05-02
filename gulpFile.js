@@ -134,6 +134,9 @@ gulp.task("buildCss", ["buildCssAtoms"], () => {
 });
 
 gulp.task("copyAssets", () => {
+	gulp.src([`${SRC}/audio/*.ogg`])
+		.pipe(newer(DEST))
+		.pipe(gulp.dest(`${DEST}/audio`));
 	gulp.src([`${SRC}/favicon.ico`])
 		.pipe(newer(DEST))
 		.pipe(gulp.dest(`${DEST}`));
