@@ -241,6 +241,11 @@
 		background-position: center bottom;
 		background-size: contain;
 		background-repeat: no-repeat;
+		
+		@media (max-width: $breakpointMobile) {
+			width: 85%;
+			right: 8vw;
+		}
 	}
 	
 	&--9b {
@@ -250,6 +255,12 @@
 		bottom: 30vw;
 		left: 0;
 		background: url('img/9b.png') center/ contain no-repeat;
+
+		@media (max-width: $breakpointMobile) {
+			width: 27vw;
+			top: -10vw;
+			bottom: unset;
+		}
 	}
 	
 	&--9c {
@@ -265,6 +276,13 @@
 				0% { transform: rotate(1deg); }
 				100% { transform: rotate(360deg); }
 			}
+		}
+		
+		@media (max-width: $breakpointMobile) {
+			height: 300vw;
+			width: 300vw;
+			top: -20vw;
+			left: -100vw;
 		}
 	}
 }
@@ -455,5 +473,11 @@
 		font-family: "Monofett", sans-serif;
 		transition-duration: 0.8s;
 		transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
+		
+		@media (max-width: $breakpointMobile) {
+			top: 12vw;
+			line-height: 9.5vw;
+			font-size: 12vw;
+		}
 	}
 }

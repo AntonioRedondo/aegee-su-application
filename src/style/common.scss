@@ -61,4 +61,9 @@ button {
 	color: #4c00ff;
 	font-size: 12vw;
 	line-height: 9vw;
+	
+	@media (max-width: $breakpointMobile) {
+		line-height: 16vw;
+		font-size: 20vw;
+	}
 }

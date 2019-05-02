@@ -110,7 +110,7 @@ function initIntro() { // eslint-disable-line
 		if (audioTrackFormer) {
 			var audioTrackFormerElement = d.gi("audio" + audioTrackFormer);
 			var fadeAudio = d.si(function() {
-				console.log("volume: " + audioTrackFormerElement.volume); // eslint-disable-line
+				// console.log("volume: " + audioTrackFormerElement.volume); // eslint-disable-line
 				if (audioTrackFormerElement.volume - 0.1 < 0) {
 					audioTrackFormerElement.pause();
 					clearInterval(fadeAudio);
