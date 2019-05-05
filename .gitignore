@@ -1,8 +1,12 @@
+.idea
+assets
+build
 dev
 node_modules
 npm-debug.log
-build
-assets
-src/style.css
-src/app.js
-.idea
+other
+src/style/_atoms.scss
+docs/**/*.css
+docs/**/*.js
+docs/**/*.svg
+docs/img/scrollDown.gif

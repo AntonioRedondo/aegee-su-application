@@ -8,12 +8,10 @@
 	"license": "CC-BY-NC-ND-4.0",
 	"main": "",
 	"scripts": {
-		"clean": "gulp clean",
 		"lint": "gulp lint",
-		"build": "gulp",
-		"build:watch": "gulp watch",
-		"build:prod": "gulp prod",
-		"prepush": "gulp lint"
+		"build:watch": "gulp buildWatch",
+		"build:prod": "gulp buildProd",
+		"clean": "gulp clean"
 	},
 	"dependencies": {
 		"webfontloader": "1.6.28"
@@ -21,27 +19,36 @@
 	"//": "Grouped by concern: basics, lint, build, production, server",
 	"devDependencies": {
 		"del": "3.0.0",
-		"gulp": "3.9.1",
-		"gulp-newer": "1.4",
+		"gulp": "4.0.0",
+		"gulp-newer": "1.4.0",
 		"gulp-sourcemaps": "2.6.4",
-		"gulp-eslint": "4.0",
-		"gulp-htmlhint": "2.1",
-		"gulp-stylelint": "6.0.0",
-		"stylelint": "9.1.1",
-		"stylelint-config-standard": "18.1",
+		
+		"gulp-eslint": "5.0.0",
+		"gulp-htmlhint": "2.2.1",
+		"gulp-stylelint": "8.0.0",
+		"stylelint": "9.9.0",
+		"stylelint-config-standard": "18.2.0",
+		"husky": "1.3.1",
+		
 		"gulp-concat": "2.6.1",
-		"gulp-replace": "0.6.1",
-		"gulp-postcss": "7.0.1",
-		"precss": "3.1.1",
-		"autoprefixer": "8.0.0",
+		"gulp-file-include": "2.0.1",
+		"gulp-replace": "1.0.0",
+		"gulp-postcss": "8.0.0",
+		"precss": "4.0.0",
+		"autoprefixer": "9.4.3",
+		"gulp-atomizer": "3.0.7",
 		"gulp-inline": "0.1.3",
-		"gulp-atomizer": "3.0",
 		"postcss-assets": "5.0.0",
-		"gulp-uglify": "3.0.0",
-		"gulp-htmlmin": "4.0.0",
-		"gulp-clean-css": "3.9.2",
+		
+		"gulp-htmlmin": "5.0.1",
+		
 		"connect": "3.6.6",
 		"serve-static": "1.13.2",
-		"opn": "5.2"
+		"opn": "5.4.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint"
+		}
 	}
 }

@@ -1,7 +1,7 @@
 @import "variables";
 
 .intro {
-	// display: none;
+	//display: none;
 	width: calc(100% + 22vh);
 	z-index: 10;
 	
@@ -38,11 +38,9 @@
 		z-index: 10;
 		
 		position: absolute;
-		right: calc(-@width);
+		right: calc(-11vh);
 		
 		background: $gray2;
-		/* border-right: white solid 2px;
-		border-left: white solid 2px; */
 		box-shadow: 0 0 30px color-mod(black alpha(70%));
 		
 		transform-origin: right top;
@@ -134,11 +132,15 @@
 		background: $profile1;
 		
 		animation: 0.5s linear infinite k__inner-spinner;
-		@at-root { @keyframes k__inner-spinner { //stylelint-disable-line
+		
+		/* stylelint-disable block-opening-brace-newline-after */
+		
+		@at-root { @keyframes k__inner-spinner {
 				0% { transform: rotate(0deg) translate3d(20px, 0, 0); }
 				100% { transform: rotate(360deg) translate3d(20px, 0, 0); }
 			}
 		}
+		/* stylelint-enable */
 	}
 }
 
@@ -169,29 +171,29 @@
 			from, 20%, 40%, 60%, 80%, to {
 				animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 			}
-
+			
 			0% {
 				opacity: 0;
 				transform: scale3d(0.3, 0.3, 0.3);
 			}
-
+			
 			20% {
 				transform: scale3d(1.1, 1.1, 1.1);
 			}
-
+			
 			40% {
 				transform: scale3d(0.9, 0.9, 0.9);
 			}
-
+			
 			60% {
 				opacity: 1;
 				transform: scale3d(1.03, 1.03, 1.03);
 			}
-
+			
 			80% {
 				transform: scale3d(0.97, 0.97, 0.97);
 			}
-
+			
 			to {
 				opacity: 1;
 				transform: scale3d(1, 1, 1);
