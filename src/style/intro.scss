@@ -148,6 +148,27 @@
 
 
 
+.sound-text {
+	width: 40vw;
+	height: 60px;
+	margin: auto;
+	
+	position: absolute;
+	bottom: calc(50% - @height/2);
+	left: 0;
+	right: 0;
+	
+	text-align: center;
+	
+	&__button {
+		background: green;
+	}
+}
+
+
+
+
+
 .scroll-down-hint {
 	display: none;
 	

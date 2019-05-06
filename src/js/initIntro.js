@@ -264,8 +264,6 @@ function initIntro() { // eslint-disable-line
 		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 } }));
 	}
 	
-	d.gc("enter-button").addEventListener("click", function() { skipIntro(); });
-	
 	d.ae("keydown", /* keyDownListener =  */function(e) {
 		switch (e.keyCode) {
 			case 39:
@@ -273,6 +271,14 @@ function initIntro() { // eslint-disable-line
 			case 37:
 			case 38: window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: -1 } })); break;
 		}
+	});
+	
+	d.gc("sound-text__button").addEventListener("click", function() {
+		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 } }));
+	});
+	
+	d.gc("enter-button").addEventListener("click", function() {
+		skipIntro(); //
 	});
 	
 	
