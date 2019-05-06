@@ -34,6 +34,7 @@ function hideIntro(type) {
 function initIntro() { // eslint-disable-line
 	d.gc("scroll-down").classList.add("scroll-down--bottom");
 	d.gc("scroll-down__inner").classList.add("scroll-down__inner--out");
+	d.st(function() { d.gc("sound-text").classList.add("sound-text--in"); }, 600);
 	
 	var viewPortWidth = document.documentElement.offsetWidth,
 		wheelLevel = 0,
@@ -49,6 +50,7 @@ function initIntro() { // eslint-disable-line
 		yStart,
 		yEnd,
 		transform = d.checkTransformsSupported(),
+		soundButtonclicked = false,
 		audioTrack,
 		audioTrackFormer,
 		mouseMoveListener,
@@ -60,7 +62,7 @@ function initIntro() { // eslint-disable-line
 		toHints;
 	
 	// On desktop version it moves the phrases and bubbles on the 3d space depending on the cursor position
-	if (viewPortWidth <= 810) {
+	if (viewPortWidth >= 810) {
 		var phrasesContainer = d.gc("phrases"),
 			bubblesContainer = d.gc("bubbles");
 		d.ae("mousemove", mouseMoveListener = function(e) {
@@ -78,16 +80,6 @@ function initIntro() { // eslint-disable-line
 				bubblesContainer.style[transform] = phrasesContainer.style[transform];
 		});
 	}
-	
-	
-	
-	// Shows a text hint if the intro doesn't start scrolling down in 3 seconds
-	toHints = d.st(function() {
-		if (wheelLevel === 0)
-			if (viewPortWidth >= 810 && d.getOS() !== "Android" && d.getOS() !== "iOS")
-				d.gc("scroll-down-hint").classList.add("scroll-down-hint--in");
-			else d.gc("swipe-up-hint").classList.add("swipe-up-hint--in");
-	}, 3000);
 	
 	
 	
@@ -123,9 +115,20 @@ function initIntro() { // eslint-disable-line
 	
 	
 	
-	// Moves phrases and bubbles accordingly
+	// Moves phrases and bubbles according to wheelLevel
 	function movePhrases() {
 		if (wheelLevel === 1) {
+			// Shows a text hint if the intro doesn't start scrolling down in 3 seconds
+			toHints = d.st(function() {
+				if (wheelLevel === 1)
+					if (viewPortWidth >= 810 && d.getOS() !== "Android" && d.getOS() !== "iOS")
+						d.gc("scroll-down-hint").classList.add("scroll-down-hint--in");
+					else d.gc("swipe-up-hint").classList.add("swipe-up-hint--in");
+			}, 2500);
+			d.gc("scroll-down").classList.add("scroll-down--bottom-in");
+		}
+		
+		if (wheelLevel === 2) {
 			d.gc("scroll-down-hint").classList.add("scroll-down-hint--out");
 			d.gc("swipe-up-hint").classList.add("swipe-up-hint--out");
 		}
@@ -158,7 +161,8 @@ function initIntro() { // eslint-disable-line
 	}
 	
 	
-	// Moves slides accordingly
+	
+	// Moves slides according to wheelLevel
 	function moveSlides() {
 		if (wheelLevel > wheelLevelFormer) {
 			slides[wheelLevel-phrasesCount-1].classList.add("slide--in");
@@ -179,9 +183,11 @@ function initIntro() { // eslint-disable-line
 		wheelLevelFormer = wheelLevel;
 	}
 	
+	
+	
 	// Counts wheel scroll movements
 	d.ae("wheel", /* mouseWheelListener =  */function(e) {
-		if (onTransition)
+		if (onTransition || !soundButtonclicked)
 			return;
 		
 		onTransition = true;
@@ -191,30 +197,30 @@ function initIntro() { // eslint-disable-line
 				break label1;
 			++wheelLevel;
 			
+			if (wheelLevel <= phrasesCount)
+				movePhrases();
+			else moveSlides();
+			
 			if (wheelLevel === 1) changeAudio(1);
 			if (wheelLevel === 6) changeAudio(2);
 			if (wheelLevel === 9) changeAudio(3);
 			if (wheelLevel === 15) changeAudio(4);
 			if (wheelLevel === 20) changeAudio(5);
 			if (wheelLevel === 23) changeAudio(6);
-			
-			if (wheelLevel <= phrasesCount)
-				movePhrases();
-			else moveSlides();
 		} else label2: if ((e.deltaY < 0 || e.detail.deltaY < 0 ) && wheelLevel > 0) {
 			if (wheelLevel === phrasesCount && d.gc("main-bg").classList.contains("main-bg--in"))
 				break label2;
 				
 			--wheelLevel;
 			
+			if (wheelLevel < phrasesCount)
+				movePhrases();
+			else moveSlides();
+			
 			if (wheelLevel === 7) changeAudio(2);
 			if (wheelLevel === 13) changeAudio(3);
 			if (wheelLevel === 19) changeAudio(4);
 			if (wheelLevel === 21) changeAudio(5);
-			
-			if (wheelLevel < phrasesCount)
-				movePhrases();
-			else moveSlides();
 		}
 		
 		// console.log(wheelLevel); // eslint-disable-line
@@ -273,12 +279,16 @@ function initIntro() { // eslint-disable-line
 		}
 	});
 	
-	d.gc("sound-text__button").addEventListener("click", function() {
+	d.gc("enter-button--sound").addEventListener("click", function() {
+		var soundText = d.gc("sound-text");
+		soundText.classList.add("sound-text--out");
+		d.st(function() { soundText.remove(); }, 1000);
+		soundButtonclicked = true;
 		window.dispatchEvent(new CustomEvent("wheel", { detail: { deltaY: 1 } }));
 	});
 	
 	d.gc("enter-button").addEventListener("click", function() {
-		skipIntro(); //
+		skipIntro();
 	});
 	
 	
