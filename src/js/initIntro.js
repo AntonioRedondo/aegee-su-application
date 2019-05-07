@@ -10,10 +10,7 @@ function hideIntro(type) {
 		introDarkener = d.gc("intro-darkener");
 		
 	intro.classList.add("intro--" + modifier);
-	intro.addEventListener("transitionend", function(e) {
-		if(e.target.classList.contains("intro"))
-			intro.style.display = "none";
-	});
+	d.st(function() { intro.remove(); }, 1200);
 	
 	introDarkener.classList.add("intro-darkener--" + modifier);
 	introDarkener.addEventListener("transitionend", function(e) {
@@ -72,7 +69,7 @@ function initIntro() { // eslint-disable-line
 			//console.log("clientY: " + e.clientY);
 			//console.log("rotateX(" + -(0.02*e.clientY-10) +"deg)");
 			// phrasesContainer.style[transform] = "rotateX(" + -(0.02*e.clientY-10) + "deg) rotateY(" + (0.02*e.clientX-25) + "deg) translate3d(" + (-0.05*e.clientX+100) + "px, 0, 0)";
-			phrasesContainer.style[transform] = "rotateX(" + -(0.02*e.clientY) + "deg) rotateY(" + (0.02*e.clientX) + "deg) translate3d(" + (-0.05*e.clientX+100) + "px, 0, 0)";
+			phrasesContainer.style[transform] = "rotateX(" + -(0.02*e.clientY) + "deg) rotateY(" + (0.02*e.clientX) + "deg) translate3d(" + (-0.05*e.clientX+40) + "px, 0, 0)";
 			
 			// Due to a weird behaviour the below line spoils the bubbles zoom effect of Chrome.
 			// With this conditional if we avoid execution on Chrome
@@ -197,7 +194,7 @@ function initIntro() { // eslint-disable-line
 				break label1;
 			++wheelLevel;
 			
-			if (wheelLevel <= phrasesCount)
+			if (wheelLevel <= phrasesCount && d.gc("intro"))
 				movePhrases();
 			else moveSlides();
 			
@@ -213,7 +210,7 @@ function initIntro() { // eslint-disable-line
 				
 			--wheelLevel;
 			
-			if (wheelLevel < phrasesCount)
+			if (wheelLevel < phrasesCount && d.gc("intro"))
 				movePhrases();
 			else moveSlides();
 			
@@ -293,5 +290,8 @@ function initIntro() { // eslint-disable-line
 	
 	
 	
-	// skipIntro(); // Uncomment it when developing and comment <div class="phrases"> on index.htm
+	// Uncomment when developing and comment <div class="phrases"> on index.htm
+	// skipIntro();
+	// soundButtonclicked = true;
+	// phrasesCount = 0;
 }

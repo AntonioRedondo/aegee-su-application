@@ -11,7 +11,7 @@
 	left: -11vh;
 	
 	background:
-		radial-gradient(ellipse at center, $profile1 30%, color-mod($profile2 alpha(0%)) 100%),
+		radial-gradient(ellipse at center, $profile1 30%, color-mod($profile2 a(0%)) 100%),
 		inline('img/bg.png'),
 		linear-gradient($profile2, $profile2);
 	
@@ -41,7 +41,7 @@
 		right: calc(-11vh);
 		
 		background: $gray2;
-		box-shadow: 0 0 30px color-mod(black alpha(70%));
+		box-shadow: 0 0 30px color-mod(black a(70%));
 		
 		transform-origin: right top;
 		transform: rotate(6deg);

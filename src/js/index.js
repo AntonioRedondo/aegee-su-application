@@ -4,7 +4,7 @@ WebFont.load({
 		families: ["Open Sans Condensed:300", "Source Sans Pro:400,900", "Black Ops One:400", "Bungee Shade:400", "Caveat:400", "Pacifico", "Monofett" ]
 	},
 	active: function() {
-		// initIntro();
+		initIntro();
 	},
 	inactive: function() {
 		window.location.reload();
