@@ -367,7 +367,7 @@
 	transition: 0.8s $ease-out;
 
 	@media (max-width: $breakpointMobile) {
-		width: 70vw;
+		width: 75vw;
 		height: 120px;
 	}
 	
@@ -444,11 +444,7 @@
 		}
 		
 		@media (max-width: $breakpointMobile) {
-			width: 50%;
-		}
-		
-		@media (max-width: $breakpointMobile) {
-			width: 50%;
+			width: 60%;
 		}
 		
 		&--last {

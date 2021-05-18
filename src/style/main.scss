@@ -104,6 +104,11 @@
 		width: 33%;
 		background-image: url('img/5a.jpg');
 		box-shadow: 0 0 8vw color-mod(#111 a(50%));
+		
+		@media (max-width: $breakpointMobile) {
+			width: 100%;
+			height: 33%;
+		}
 	}
 	
 	&--5b {
@@ -112,6 +117,13 @@
 		background-image: url('img/5b.jpg');
 		background-position-x: 67%;
 		box-shadow: 0 0 8vw color-mod(#111 a(50%));
+		
+		@media (max-width: $breakpointMobile) {
+			width: 100%;
+			height: 33%;
+			top: 33%;
+			left: 0%;
+		}
 	}
 	
 	&--5c {
@@ -121,6 +133,13 @@
 		background-image: url('img/5c.jpg');
 		background-position-x: 30%;
 		box-shadow: 0 0 8vw color-mod(#111 a(50%));
+		
+		@media (max-width: $breakpointMobile) {
+			width: 100%;
+			height: 34%;
+			top: 66%;
+			left: 0%;
+		}
 	}
 	
 	&--6 {
@@ -131,6 +150,11 @@
 		width: 33%;
 		background-image: url('img/6a.jpg');
 		box-shadow: 0 0 8vw color-mod(#111 a(50%));
+		
+		@media (max-width: $breakpointMobile) {
+			width: 100%;
+			height: 33%;
+		}
 	}
 	
 	&--6b {
@@ -139,6 +163,13 @@
 		background-image: url('img/6b.jpg');
 		box-shadow: 0 0 8vw color-mod(#111 a(50%));
 		background-position-x: 67%;
+		
+		@media (max-width: $breakpointMobile) {
+			width: 100%;
+			height: 33%;
+			top: 33%;
+			left: 0%;
+		}
 	}
 	
 	&--6c {
@@ -148,15 +179,13 @@
 		background-image: url('img/6c.jpg');
 		box-shadow: 0 0 8vw color-mod(#111 a(50%));
 		background-position-x: 30%;
-	}
-	
-	&--10a {
-		background-image: linear-gradient(135deg, $profile1, #7234c5);
-		color: #a7fffb;
-	}
-	
-	&--10b {
-		color: #a7fffb;
+		
+		@media (max-width: $breakpointMobile) {
+			width: 100%;
+			height: 34%;
+			top: 66%;
+			left: 0%;
+		}
 	}
 	
 	&--7 {
@@ -265,8 +294,8 @@
 		background-repeat: no-repeat;
 		
 		@media (max-width: $breakpointMobile) {
-			width: 85%;
-			right: 8vw;
+			width: 96vw;
+			right: 2vw;
 		}
 	}
 	
@@ -307,6 +336,15 @@
 			left: -100vw;
 		}
 	}
+	
+	&--10a {
+		background-image: linear-gradient(135deg, $profile1, #7234c5);
+		color: #a7fffb;
+	}
+	
+	&--10b {
+		color: #a7fffb;
+	}
 }
 
 .slide-text {
@@ -333,10 +371,11 @@
 		line-height: 4vw;
 		font-size: 4vw;
 		font-family: "Black Ops One", sans-serif;
+		text-shadow: 0 0 5vw color-mod(white a(50%));
 		
 		@media (max-width: $breakpointMobile) {
-			line-height: 8vw;
-			font-size: 8.5vw;
+			line-height: 10vw;
+			font-size: 9vw;
 			text-shadow: 0 0 5vw color-mod(white a(50%));
 		}
 	}
@@ -351,6 +390,11 @@
 		text-align: right;
 		
 		@media (max-width: $breakpointMobile) {
+			right: unset;
+			top: unset;
+			bottom: 5vw;
+			left: 5vw;
+			text-align: left;
 			line-height: 10vw;
 			font-size: 11vw;
 		}
@@ -382,7 +426,7 @@
 		@media (max-width: $breakpointMobile) {
 			top: unset;
 			bottom: 5%;
-			line-height: 11vw;
+			line-height: 12vw;
 			font-size: 12vw;
 		}
 	}
@@ -396,8 +440,8 @@
 		color: #9c27b0;
 		
 		@media (max-width: $breakpointMobile) {
-			line-height: 11vw;
-			font-size: 12vw;
+			line-height: 14vw;
+			font-size: 16vw;
 		}
 	}
 	
@@ -407,10 +451,18 @@
 		line-height: 3vw;
 		font-size: 3vw;
 		font-family: "Source Sans Pro", sans-serif;
+		text-shadow: 0 0 2vw black;
+		
+		@media (max-width: $breakpointMobile) {
+			line-height: 9vw;
+			font-size: 9vw;
+		}
 	}
 	
 	&--5black {
-		color: black;
+		@media (min-width: $breakpointMobile) {
+			color: black;
+		}
 	}
 	
 	&--6 {
@@ -421,6 +473,8 @@
 		font-family: "Bungee Shade", sans-serif;
 		
 		@media (max-width: $breakpointMobile) {
+			top: unset;
+			bottom: 5vw;
 			line-height: 14vw;
 			font-size: 12vw;
 		}
@@ -437,6 +491,13 @@
 		text-align: center;
 		color: white;
 		text-shadow: 0 0 3vw color-mod(#f44336 a(100%));
+		
+		@media (max-width: $breakpointMobile) {
+			padding-left: 6vw;
+			text-align: left;
+			line-height: 12vw;
+			font-size: 12vw;
+		}
 	}
 	
 	&--6b {
@@ -450,6 +511,13 @@
 		text-align: center;
 		color: white;
 		text-shadow: 0 0 3vw color-mod(#e91e63 a(100%));
+		
+		@media (max-width: $breakpointMobile) {
+			padding-left: 6vw;
+			text-align: left;
+			line-height: 12vw;
+			font-size: 12vw;
+		}
 	}
 	
 	&--6c {
@@ -462,6 +530,13 @@
 		text-align: center;
 		color: white;
 		text-shadow: 0 0 3vw color-mod(#ab47bc a(100%));
+		
+		@media (max-width: $breakpointMobile) {
+			padding-left: 6vw;
+			text-align: left;
+			line-height: 12vw;
+			font-size: 12vw;
+		}
 	}
 	
 	&--7 {
@@ -488,6 +563,12 @@
 	
 	&--7b {
 		font-size: 1.5vw;
+		
+		@media (max-width: $breakpointMobile) {
+			padding-top: 2vw;
+			font-size: 4vw;
+			line-height: 4vw;
+		}
 	}
 	
 	&--8 {
@@ -500,6 +581,7 @@
 		text-align: center;
 
 		@media (max-width: $breakpointMobile) {
+			margin: 40vh 0 0;
 			line-height: 8vw;
 			font-size: 8.5vw;
 		}
@@ -516,7 +598,7 @@
 		transition-timing-function: cubic-bezier(0, 0, 0.25, 1);
 		
 		@media (max-width: $breakpointMobile) {
-			top: 12vw;
+			top: 15vw;
 			line-height: 9.5vw;
 			font-size: 12vw;
 		}
@@ -532,6 +614,13 @@
 		font-family: "Bungee Shade", sans-serif;
 		text-align: center;
 		text-transform: uppercase;
+		
+		@media (max-width: $breakpointMobile) {
+			margin-top: 5vh;
+			padding: 0 5vh;
+			font-size: 6vw;
+			line-height: 7vw;
+		}
 	}
 	
 	&--10b {
@@ -539,6 +628,11 @@
 		text-transform: uppercase;
 		font-family: "Bungee Shade", sans-serif;
 		line-height: 3vw;
+		
+		@media (max-width: $breakpointMobile) {
+			font-size: 4.5vw;
+			line-height: 8vw;
+		}
 	}
 	
 	&--10c {
@@ -546,5 +640,12 @@
 		position: absolute;
 		font-size: 1.5vw;
 		font-family: "Source Sans Pro", sans-serif;
+		
+		@media (max-width: $breakpointMobile) {
+			margin-left: 6vw;
+			padding-right: 2vw;
+			font-size: 3.5vw;
+			line-height: 4.6vw;
+		}
 	}
 }

@@ -1,15 +1,41 @@
+.D\(n\) {
+  display: none;
+}
 .Fz\(4vw\) {
   font-size: 4vw;
 }
-.T\(30vh\) {
-  top: 30vh;
+.T\(28vh\) {
+  top: 28vh;
 }
-.T\(44vh\) {
-  top: 44vh;
+.T\(43vh\) {
+  top: 43vh;
 }
-.T\(72vh\) {
-  top: 72vh;
+.T\(69vh\) {
+  top: 69vh;
 }
 .Start\(42vw\) {
   left: 42vw;
+}
+@media (max-width: 810px) {
+  .D\(b\)--mo {
+    display: block;
+  }
+  .Fz\(8vw\)--mo {
+    font-size: 8vw;
+  }
+  .T\(20vh\)--mo {
+    top: 20vh;
+  }
+  .T\(46vh\)--mo {
+    top: 46vh;
+  }
+  .T\(56vh\)--mo {
+    top: 56vh;
+  }
+  .T\(67vh\)--mo {
+    top: 67vh;
+  }
+  .Start\(0vh\)--mo {
+    left: 0vh;
+  }
 }
