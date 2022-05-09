@@ -1,13 +1,7 @@
 // Basics
-const del = require("del");
 const gulp = require("gulp");
 const newer = require("gulp-newer");
 const sourcemaps = require("gulp-sourcemaps");
-
-// Lint
-const esLint = require("gulp-eslint");
-const htmlHint = require("gulp-htmlhint");
-const styleLint = require("gulp-stylelint");
 
 // Build
 const concat = require("gulp-concat");
@@ -16,103 +10,58 @@ const replace = require("gulp-replace");
 const inline = require("gulp-inline");
 const postCss = require("gulp-postcss");
 const preCss = require("precss");
-const autoprefixer = require("autoprefixer");
 const atomizer = require("gulp-atomizer");
+const atomCssConfig = require("./atomCssConfig.js");
 const assets = require("postcss-assets");
 
 // Production
 const htmlMin = require("gulp-htmlmin");
 
 
-
 const SRC = "src";
 const DEST = "docs";
 
 
-
-// ---------- LINT ---------- //
-
-const esLintTask = () => {
-	return gulp.src([`${SRC}/js/*.js`, `!${SRC}/js/plygrnd.js`])
-		.pipe(esLint())
-		.pipe(esLint.format())
-		.pipe(esLint.failAfterError());
-};
-
-const htmlHintTask = () => {
-	return gulp.src([`${SRC}/**/*.htm`])
-		.pipe(htmlHint(".htmlhintrc"))
-		// .pipe(htmlHint.reporter())
-		.pipe(htmlHint.failReporter());
-};
-
-const stylelintTask = () => {
-	return gulp.src([`${SRC}/style/*.scss`, `!${SRC}/style/_atoms.scss`, `!${SRC}/style/style.css`]).pipe(styleLint({
-		reporters: [{ formatter: "string", console: true }]
-	}));
-};
-
-
-
-
-
 // ---------- BUILD ---------- //
 
-const buildJsTask = async () => {
-	return gulp.src(
-		[
-			"node_modules/webfontloader/webfontloader.js",
-			`${SRC}/js/plygrnd.js`,
-			`${SRC}/js/DOMTools.js`,
-			`${SRC}/js/initIntro.js`,
-			`${SRC}/js/index.js`
-		])
+const buildJsTask = () =>
+	gulp.src([
+		"node_modules/webfontloader/webfontloader.js",
+		`${SRC}/js/plygrnd.js`,
+		`${SRC}/js/DOMTools.js`,
+		`${SRC}/js/initIntro.js`,
+		`${SRC}/js/index.js`
+	])
 		.pipe(sourcemaps.init())
 		.pipe(concat("app.js"))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(DEST));
-};
 
-const buildHtmlTask = () => {
-	return gulp.src([`${SRC}/htm/index.htm`])
+const buildHtmlTask = () =>
+	gulp.src([`${SRC}/html/index.html`])
 		.pipe(include())
 		.pipe(gulp.dest(DEST));
-};
 
-const buildCssAtomsTask = () => {
-	return gulp.src([`${SRC}/**/*.htm`])
-		.pipe(atomizer({
-			outfile: "_atoms.scss",
-			acssConfig: {
-				breakPoints: {
-					bi: "@media (min-width: 2000px)",
-					me: "@media (max-width: 1470px)",
-					sm: "@media (max-width: 1100px)",
-					mo: "@media (max-width: 810px)"
-				}
-			}
-		}))
+const buildCssAtomsTask = () =>
+	gulp.src([`${SRC}/**/*.html`])
+		.pipe(atomizer(atomCssConfig))
 		.pipe(gulp.dest(`${SRC}/style`));
-};
 
-const buildCssTask = () => {
-	return gulp.src(
-		[
-			`${SRC}/style/_variables.scss`,
-			`${SRC}/style/common.scss`,
-			`${SRC}/style/!(_atoms)*.scss`,
-			`${SRC}/style/_atoms.scss`
-		])
+const buildCssTask = () =>
+	gulp.src([
+		`${SRC}/style/_variables.scss`,
+		`${SRC}/style/common.scss`,
+		`${SRC}/style/!(_atoms)*.scss`,
+		`${SRC}/style/z_atoms.scss`
+	])
 		.pipe(sourcemaps.init())
 		.pipe(concat("style.css"))
 		.pipe(postCss([
 			preCss({ features: { "color-mod-function": { unresolved: "warn" } } }),
-			autoprefixer({ browsers: ["safari 9", "ie 11"] }), // https://github.com/ai/browserslist
 			assets({ loadPaths: [SRC] })
 		]))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest(DEST));
-};
 
 const copyAssetsTask = () => {
 	gulp.src([`${SRC}/favicon.ico`])
@@ -124,13 +73,10 @@ const copyAssetsTask = () => {
 };
 
 
-
-
-
 // ---------- PRODUCTION ---------- //
 
-const prodTask = () => {
-	return gulp.src([`${DEST}/index.htm`])
+const prodTask = () =>
+	gulp.src([`${DEST}/index.html`])
 		.pipe(inline({
 			// base: DEST,
 			disabledTypes: ["img"/*, "svg", "js", "css"*/]
@@ -145,19 +91,15 @@ const prodTask = () => {
 			removeRedundantAttributes: true
 		}))
 		.pipe(gulp.dest(DEST));
-};
-
 
 
 const buildTask = gulp.parallel(buildJsTask, buildHtmlTask, gulp.series(buildCssAtomsTask, buildCssTask), copyAssetsTask);
 
-exports.lint = gulp.parallel(esLintTask, htmlHintTask, stylelintTask);
-exports.buildWatch = gulp.series(buildTask, function watchTask() {
-	gulp.watch([`${SRC}/js/*.js`], gulp.parallel(esLintTask, buildJsTask));
-	gulp.watch([`${SRC}/**/*.htm`], gulp.parallel(htmlHintTask, buildHtmlTask));
-	gulp.watch([`${SRC}/style/*.scss`, `!${SRC}/style/_atoms.scss`, `${SRC}/**/*.htm`], gulp.parallel(stylelintTask, gulp.series(buildCssAtomsTask, buildCssTask)));
+exports.dev = gulp.series(buildTask, function watchTask() {
+	gulp.watch([`${SRC}/js/*.js`], buildJsTask);
+	gulp.watch([`${SRC}/**/*.html`], buildHtmlTask);
+	gulp.watch([`${SRC}/style/*.scss`, `!${SRC}/style/z_atoms.scss`, `${SRC}/**/*.html`], gulp.series(buildCssAtomsTask, buildCssTask));
 	gulp.watch([`${SRC}/img/**`], gulp.parallel(copyAssetsTask));
 });
-exports.buildProd = gulp.series(buildTask, prodTask);
-exports.clean = () => del(DEST);
-exports.default = exports.watch;
+exports.build = gulp.series(buildTask, prodTask);
+exports.default = exports.build;
