@@ -290,7 +290,7 @@ function initIntro() { // eslint-disable-line
 	
 	
 	
-	// Uncomment when developing and comment <div class="phrases"> on index.htm
+	// Uncomment when developing and comment <div class="phrases"> on index.html
 	// skipIntro();
 	// soundButtonclicked = true;
 	// phrasesCount = 0;
