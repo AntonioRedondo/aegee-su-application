@@ -1,7 +1,6 @@
 @import "variables";
 
 .intro {
-	//display: none;
 	width: calc(100% + 22vh);
 	z-index: 10;
 	
@@ -12,7 +11,7 @@
 	
 	background:
 		radial-gradient(ellipse at center, $profile1 30%, color-mod($profile2 a(0%)) 100%),
-		inline('img/bg.png'),
+		inline("img/bg.png"),
 		linear-gradient($profile2, $profile2);
 	
 	transition: all ease-in 1s;
@@ -58,11 +57,11 @@
 	margin: auto;
 	
 	position: absolute;
-	bottom: calc(50% - @height/2);
+	bottom: calc(50% - @height / 2);
 	left: 0;
 	right: 0;
 	
-	background: inline('img/scrollDown.gif') no-repeat center / 100%;
+	background: inline("img/scrollDown.gif") no-repeat center / 100%;
 	
 	transition: all ease-out 0.5s;
 	
@@ -139,7 +138,7 @@
 		
 		/* stylelint-disable block-opening-brace-newline-after */
 		
-		@at-root { @keyframes k__inner-spinner {
+		@at-root { @keyframes k__inner-spinner { /* stylelint-disable-line keyframes-name-pattern */
 				0% { transform: rotate(0deg) translate3d(20px, 0, 0); }
 				100% { transform: rotate(360deg) translate3d(20px, 0, 0); }
 			}
@@ -354,7 +353,7 @@
 	margin: auto;
 	
 	position: absolute;
-	bottom: calc(50% - @height/2);
+	bottom: calc(50% - @height / 2);
 	left: 0;
 	right: 0;
 	
@@ -395,7 +394,7 @@
 	position: absolute;
 	
 	font-size: 2vw;
-	font-family: 'Open Sans Condensed', sans-serif;
+	font-family: "Open Sans Condensed", sans-serif;
 		
 	cursor: default;
 
@@ -564,34 +563,34 @@
 		transition: all ease-in-out 3s;
 		
 		&--1, &--5 {
-			background-image: inline('img/b1.svg');
+			background-image: inline("img/b1.svg");
 			
 			@media (max-width: $breakpointMobile) {
-				background-image: inline('img/b1m.svg');
+				background-image: inline("img/b1m.svg");
 			}
 		}
 		
 		&--2 {
-			background-image: inline('img/b2.svg');
+			background-image: inline("img/b2.svg");
 			
 			@media (max-width: $breakpointMobile) {
-				background-image: inline('img/b2m.svg');
+				background-image: inline("img/b2m.svg");
 			}
 		}
 		
 		&--3 {
-			background-image: inline('img/b3.svg');
+			background-image: inline("img/b3.svg");
 			
 			@media (max-width: $breakpointMobile) {
-				background-image: inline('img/b3m.svg');
+				background-image: inline("img/b3m.svg");
 			}
 		}
 		
 		&--4 {
-			background-image: inline('img/b4.svg');
+			background-image: inline("img/b4.svg");
 			
 			@media (max-width: $breakpointMobile) {
-				background-image: inline('img/b4m.svg');
+				background-image: inline("img/b4m.svg");
 			}
 		}
 	}

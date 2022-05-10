@@ -5,14 +5,14 @@ var Plygrnd = function() {
 	this.views = [];                    // Array with views
 	this.totalViews = [];               // Counter to keep track if all views are loaded.
 	this.currentView = 0;               // CurrentView
-	this.mousePosition = {x: (document.body.clientWidth/100*20), y: (document.body.clientHeight/100*20) }; // Mouse position (can be used by views)
+	this.mousePosition = { x: (document.body.clientWidth/100*20), y: (document.body.clientHeight/100*20) }; // Mouse position (can be used by views)
 	this.frameRate = 60;
 	this.mouseDown = false;
 	this.click = false;
 
 	// Create canvas object:
 	this.canvas = document.getElementsByClassName("main-bg")[0];
-//				document.body.appendChild(this.canvas);
+	// document.body.appendChild(this.canvas);
 
 	// Context Object:
 	this.ctx = this.canvas.getContext("2d");
@@ -139,7 +139,7 @@ var Plygrnd = function() {
 			intervalTimeout++;
 			if(intervalTimeout == 300) {
 				// waited for 30 seconds. Something is clearly wrong.
-				alert("Time out! Is your Internet connection thát slow?!?");
+				console.log("Time out! Is your Internet connection thát slow?!?"); // eslint-disable-line no-console
 				clearInterval(intervalID);
 			}
 			// Check if all views are loaded:
@@ -165,7 +165,7 @@ var Plygrnd = function() {
 				clearInterval(intervalID);
 
 				// Build the pager:
-//							_this.buildPager();
+				// _this.buildPager();
 
 				// Start the app:
 				_this.start();
@@ -186,7 +186,7 @@ var Plygrnd = function() {
 		 }
 		 } else {*/
 		_this.currentView = _this.views.length - 1;
-//					}
+		//	}
 		_this.playView(_this.currentView);
 		// Setup the loop:
 		// setInterval(function aName(){
@@ -200,7 +200,7 @@ var Plygrnd = function() {
 			_this.views[_this.currentView].stepFunction(_this.ctx, _this.views[_this.currentView].vars);
 			requestAnimationFrame(aName);
 		// }, 1000 / _this.frameRate); // default = 60 fps.
-			})();
+		})();
 	};
 
 	this.playView = function(viewNr)
@@ -208,17 +208,19 @@ var Plygrnd = function() {
 		// Un-initialize the current view:
 		try {
 			_this.views[_this.currentView].unInitFunction(_this.ctx, _this.views[_this.currentView].vars);
-		} catch(e) {}
+		} catch(e) {
+			console.error("Time out! Is your Internet connection thát slow?!?"); // eslint-disable-line no-console
+		}
 		// Go further with the requested view from here:
 		_this.currentView = viewNr;
 		// Remove the class of the active view:
-//					if(this.pager.querySelector("a.active")) {
-//						this.pager.querySelector("a.active").className = "";
-//					}
+		// if(this.pager.querySelector("a.active")) {
+		// 	this.pager.querySelector("a.active").className = "";
+		// }
 		// And add it to the new view!
-//					this.pager.querySelector("a[data-view="" + _this.currentView + ""]").className = "active"
+		// this.pager.querySelector("a[data-view="" + _this.currentView + ""]").className = "active"
 		// Set the hash:
-//					window.location.hash = _this.views[_this.currentView].slug;
+		// window.location.hash = _this.views[_this.currentView].slug;
 		// Initialize the current view:
 		_this.views[_this.currentView].initFunction(_this.ctx, _this.views[_this.currentView].vars);
 	};
@@ -299,7 +301,7 @@ pg.views.push({
 		vars.prevDistances = {};
 	},
 	// Un-initialisation:
-	unInitFunction  : function(ctx, vars){},
+	unInitFunction  : function(){},
 	// Stepping function:
 	stepFunction    : function(ctx, vars){
 		ctx.clearRect(0, 0, ctx.width, ctx.height);
@@ -307,7 +309,7 @@ pg.views.push({
 		var stepsX = ctx.width / stepSize;
 		var stepsY = ctx.height / stepSize;
 
-//					ctx.fillStyle = "#00ddff";
+		//					ctx.fillStyle = "#00ddff";
 		ctx.fillStyle = "#8c243e";
 
 		// Adds a simple ease to the mouse:
