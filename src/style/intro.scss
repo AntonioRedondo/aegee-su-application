@@ -348,7 +348,7 @@
 
 
 .sound-text {
-	width: 40vw;
+	width: 78vw;
 	height: 100px;
 	margin: auto;
 	
@@ -366,7 +366,7 @@
 	transition: 0.8s $ease-out;
 
 	@media (max-width: $breakpointMobile) {
-		width: 78vw;
+		width: 90vw;
 		height: 120px;
 	}
 	
@@ -394,7 +394,8 @@
 	position: absolute;
 	
 	font-size: 2vw;
-	font-family: "Open Sans Condensed", sans-serif;
+	font-family: "Open Sans", sans-serif;
+	font-weight: 300;
 		
 	cursor: default;
 
@@ -447,7 +448,6 @@
 		}
 		
 		&--last {
-			font-family: "Source Sans Pro", sans-serif;
 			font-weight: 900;
 			backface-visibility: hidden;
 		}
